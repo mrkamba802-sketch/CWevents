@@ -1,0 +1,103 @@
+settings:
+  auto:
+    enabled: true
+    interval-minutes: 90
+    chance-percent: 35.0
+
+event:
+  name: "Воздушный конвой"
+  countdown-seconds: 45
+  duration-seconds: 1200
+  claim-cleanup-seconds: 180
+  show-coordinates: true
+
+spawn:
+  world: world
+  mode: RANDOM
+  y: 170
+  min-x: -5000
+  max-x: 5000
+  min-z: -5000
+  max-z: 5000
+  fixed-x: 0
+  fixed-z: 0
+  safe-search-attempts: 30
+
+protection:
+  horizontal-radius: 28
+  vertical-radius: 20
+  command-whitelist: []
+  deny-teleport-into-zone: true
+  deny-teleport-out-of-zone: true
+
+guards:
+  spawn-radius: 6
+  wave-delay-seconds: 4
+  waves:
+    - type: PILLAGER
+      amount: 5
+      health: 28.0
+      damage: 5.0
+      name: "&cОхрана конвоя"
+    - type: VINDICATOR
+      amount: 4
+      health: 38.0
+      damage: 8.0
+      name: "&4Элитная охрана"
+  boss:
+    type: RAVAGER
+    health: 260.0
+    damage: 18.0
+    name: "&6Капитан воздушного конвоя"
+
+rewards:
+  chest-rolls: 12
+  winner-commands:
+    - "give %player% diamond 8"
+    - "eco give %player% 5000"
+  participation-commands:
+    - "give %player% emerald 2"
+  items:
+    - material: DIAMOND
+      weight: 5
+      min: 2
+      max: 5
+      name: "&bАлмазы конвоя"
+    - material: EMERALD
+      weight: 12
+      min: 4
+      max: 12
+      name: "&aИзумруды конвоя"
+    - material: GOLDEN_APPLE
+      weight: 8
+      min: 1
+      max: 3
+      name: "&6Золотые яблоки"
+    - material: ENCHANTED_GOLDEN_APPLE
+      weight: 1
+      min: 1
+      max: 1
+      name: "&dЗапретный трофей"
+    - material: NETHERITE_INGOT
+      weight: 1
+      min: 1
+      max: 1
+      name: "&5Незеритовый слиток"
+    - material: EXPERIENCE_BOTTLE
+      weight: 15
+      min: 8
+      max: 24
+      name: "&aОпыт конвоя"
+
+messages:
+  prefix: "&8[&6CWevents&8] "
+  no-permission: "&cУ вас нет прав."
+  already-running: "&cИвент уже запущен."
+  not-running: "&cСейчас нет активного ивента."
+  started: "&aИвент принудительно запущен."
+  stopped: "&eИвент остановлен."
+  reloaded: "&aКонфигурация перезагружена."
+  blocked-command: "&cКоманды запрещены во время участия в ивенте."
+  blocked-action: "&cВ зоне конвоя нельзя ломать, ставить или взаимодействовать с блоками."
+  chest-locked: "&cСначала победите капитана конвоя!"
+  chest-owned: "&cЭтот груз уже закреплён за другим игроком."
