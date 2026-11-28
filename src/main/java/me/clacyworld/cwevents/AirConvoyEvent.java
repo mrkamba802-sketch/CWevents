@@ -51,6 +51,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -520,7 +521,6 @@ public final class AirConvoyEvent implements Listener {
             }
             inventory.addItem(item);
         }
-        chest.update(true, false);
     }
 
     private Map<?, ?> chooseWeightedReward(List<Map<?, ?>> rewards) {
@@ -707,6 +707,16 @@ public final class AirConvoyEvent implements Listener {
                 if (entity.getPersistentDataContainer().has(plugin.getMobKey(), PersistentDataType.BYTE)) {
                     entity.remove();
                 }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onChunkLoad(ChunkLoadEvent event) {
+        // Also remove tagged guards from chunks that were not loaded during plugin startup.
+        for (Entity entity : event.getChunk().getEntities()) {
+            if (entity.getPersistentDataContainer().has(plugin.getMobKey(), PersistentDataType.BYTE)) {
+                entity.remove();
             }
         }
     }
