@@ -18,6 +18,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -425,8 +426,8 @@ public final class AirConvoyEvent implements Listener {
         eventMobs.add(living.getUniqueId());
 
         Player nearest = nearestPlayer(location, 32.0);
-        if (nearest != null) {
-            living.setTarget(nearest);
+        if (nearest != null && living instanceof Mob mob) {
+            mob.setTarget(nearest);
         }
         return living;
     }
@@ -814,8 +815,8 @@ public final class AirConvoyEvent implements Listener {
         if (isInside) {
             for (UUID mobId : eventMobs) {
                 Entity entity = Bukkit.getEntity(mobId);
-                if (entity instanceof LivingEntity living && living.getTarget() == null) {
-                    living.setTarget(player);
+                if (entity instanceof Mob mob && mob.getTarget() == null) {
+                    mob.setTarget(player);
                 }
             }
         }
